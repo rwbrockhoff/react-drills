@@ -1,18 +1,48 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(){
+    super()
+
+    this.state = {
+      ourList: ['milk', 'cheese', 'yogurt', 'kombucha'],
+      currentInput: '',
+      filteredOutput: ['milk', 'cheese', 'yogurt', 'kombucha']
+    }
+  }
+
+  updateValue(e){
+    this.setState({
+      currentInput: e
+    })
+
+    let filteredArray = this.state.ourList.filter((val, i) => {
+      return val.startsWith(e)
+    })
+
+    this.setState({
+      filteredOutput: filteredArray
+    })
+    
+    }
+
+    makePretty(){
+      let tempArr = this.state.filteredOutput;
+      let answer = tempArr.map( (e, i) => {
+       return <li key={i}> {e}  </li>
+       
+      })
+      return answer;
+    }
+
+  
+  
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <input onChange={ (e)=> this.updateValue(e.target.value) } />
+        <h4> {this.makePretty()}</h4>
       </div>
     );
   }

@@ -1,18 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(){
+    super()
+
+    this.state = {
+      list: ['apple', 'poorly written poetry', 'funny corners', 'random assignment']
+    }
+  }
+  
+  display(){
+    let mapping = this.state.list;
+    let finalMap = mapping.map( (e,i,r) => {
+      return <li key={i}> {e } </li>
+    })
+    return finalMap
+  }
+  
+  
   render() {
+    
+    
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+
+      <ul> <h2> {this.display()} </h2> </ul>
       </div>
     );
   }
